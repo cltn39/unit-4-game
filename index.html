@@ -4,82 +4,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <link rel="text/javascript" href="./assets/javascript/game.js">
+    <script type="text/javascript" src="./assets/javascript/game.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Star Wars game</title>
 </head>
 
 <body>
+    <i class="fas fa-heartbeat"></i>
+    <div class="backGround">
 
-    <div class="bg">
-    <h1>Star Wards RPG!</h1>
-    <div class="container">
+        <h1 class="text-right">Star Wars RPG!</h1>
+
         <div class="col-sm-2">
-            <div class="card" style="width: 18rem;">
-                <h5 class="card-title">obi-wan Kenobi</h5>
-                <img src="./assets/images/obiwankenobi.jpg" class="card-img-top" alt="obi-wan Kenobi" width="100px">
+            <div class="card selection" id="Kenobi" style="width: 18rem;">
+                <h4 class="card-title text-center">obi-wan Kenobi</h4>
+                <img src="./assets/images/obiwankenobi.jpg" class="card-img-top" alt="obi-wan Kenobi" width="150px"
+                    height="90px">
                 <div class="card-body">
-                    <p class="card-text"></p>
+                    <p class="card-text">HP</p>
                 </div>
             </div>
         </div>
         <div class="col-sm-2">
-            <div class="card" style="width: 18rem;">
-                <h5 class="card-title">Luke Skywalker</h5>
-                <img src="./assets/images/Lukeskywalker.jpg" class="card-img-top" alt="Luke Skywalker" width="100px">
+            <div class="card selection" id="Skywalker" style="width: 18rem;">
+                <h4 class="card-title text-center">Luke Skywalker</h4>
+                <img src="./assets/images/Lukeskywalker.jpg" class="card-img-top" alt="Luke Skywalker" width="150px"
+                    height="90px">
                 <div class="card-body">
-                    <p class="card-text"></p>
+                    <p class="card-text">HP</p>
                 </div>
             </div>
         </div>
         <div class="col-sm-2">
-            <div class="card" style="width: 18rem;">
-                <h5 class="card-title">Darth Sidious</h5>
-                <img src="./assets/images/Darthsidious.jpg" class="card-img-top" alt="Darth Sidious" width="100px">
+            <div class="card selection" id="Sidious" style="width: 18rem;">
+                <h4 class="card-title text-center">Darth Sidious</h4>
+                <img src="./assets/images/Darthsidious.jpg" class="card-img-top" alt="Darth Sidious" width="150px"
+                    height="90px">
                 <div class="card-body">
-                    <p class="card-text"></p>
+                    <p class="card-text">HP</p>
                 </div>
             </div>
         </div>
         <div class="col-sm-2">
-            <div class="card" style="width: 18rem;">
-                <h5 class="card-title">Darth Maul</h5>
-                <img src="./assets/images/Darthmaul.jpg" class="card-img-top" alt="Darth Maul" width="100px">
+            <div class="card selection" id="Maul" style="width: 18rem;">
+                <h4 class="card-title text-center">Darth Maul</h4>
+                <img src="./assets/images/Darthmaul.jpg" class="card-img-top" alt="Darth Maul" width="150px"
+                    height="90px">
                 <div class="card-body">
-                    <p class="card-text"></p>
+                    <p class="card-text">HP</p>
                 </div>
             </div>
         </div>
-        <p>Your Character</p>
-        <p>Enemies Available To Attack</p>
-        <p>Fight Sections</p>
-        <button>Attack</button>
-        <p>Defender</p>
+        <div class="card col-sm-12">
+            <div class="card-body">
+                <p id="yourCharacter">Your Character</p>
+                <p id="enemyCharacter">Enemies Available To Attack</p>
+                <p>Fight Sections</p>
+                <button>Attack</button>
+                <p id="defender">Defender</p>
+            </div>
+        </div>
+
     </div>
-</div>
+    <script type='text/javascript'>
+
+        $(document).ready(function () {
+            var checkStage = 1;
+            var myCharacter = "";
+            var badCharacter = "";
+
+            $(".selection").on("click", function () {
+                if (checkStage === 1) {
+                    myCharacter = $(this).attr("id");
+
+                    $("#yourCharacter").append($(this));
+                    $(".selection").each(function () {
+                        var notSelected = $(this).attr("id");
+                        if (notSelected !== myCharacter) {
+                            $("#enemyCharacter").append($(this));
+                        };
+                    });
+                } else {
+                    if ($(this).attr("id") !== myCharacter) {
+                        badCharacter = $(this).attr("id");
+                        $("#defender").append($(this));
+                        $(".selection").each(function () {
+                            var notSelected = $(this).attr("id");
+                            if (notSelected !== myCharacter && notSelected !== badCharacter) {
+                                $(this).hide();
+
+                            };
+                        });
+                    }
+                    
+                };
+                checkStage++;
+                console.log(checkStage);
+                               
+
+            })
+
+        });
+    </script>
 </body>
 
 </html>
-<!-- * When the game starts, the player will choose a character by clicking on the fighter's picture. The player will fight as that character for the rest of the game.
-
-   * The player must then defeat all of the remaining fighters. Enemies should be moved to a different area of the screen.
-
-   * The player chooses an opponent by clicking on an enemy's picture.
-
-   * Once the player selects an opponent, that enemy is moved to a `defender area`.
-
-   * The player will now be able to click the `attack` button.
-     * Whenever the player clicks `attack`, their character damages the defender. The opponent will lose `HP` (health points). These points are displayed at the bottom of the defender's picture. 
-     * The opponent character will instantly counter the attack. When that happens, the player's character will lose some of their `HP`. These points are shown at the bottom of the player character's picture.
-
-3. The player will keep hitting the attack button in an effort to defeat their opponent.
-
-   * When the defender's `HP` is reduced to zero or below, remove the enemy from the `defender area`. The player character can now choose a new opponent.
-
-4. The player wins the game by defeating all enemy characters. The player loses the game the game if their character's `HP` falls to zero or below. -->
